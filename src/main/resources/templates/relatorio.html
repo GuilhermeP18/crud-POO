@@ -23,8 +23,8 @@
 </div>
 
 <script th:inline="javascript">
-    const nomes = [[{nomes}]];
-    const quantidades = [[{quantidades}]];
+    const nomes = [[${nomes}]];
+    const quantidades = [[${quantidades}]];
 
     const ctx = document.getElementById('meuGrafico').getContext('2d');
     new Chart(ctx, {
