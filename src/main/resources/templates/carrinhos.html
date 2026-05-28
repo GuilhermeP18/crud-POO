@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Carrinhos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="card shadow mb-4">
+        <div class="card-header bg-dark text-white">
+            <h2 class="mb-0" th:text="${carrinho.id != null} ? 'Editar Carrinho' : 'Novo Carrinho'"></h2>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/carrinhos/salvar}" th:object="${carrinho}" method="post" class="row g-3">
+                <input type="hidden" th:field="*{id}">
+                <div class="col-md-8">
+                    <label class="form-label">Cliente</label>
+                    <input type="text" class="form-control" th:field="*{nomeCliente}" required>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success">Salvar</button>
+                    <a th:href="@{/carrinhos}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Cliente</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="c : ${carrinhos}">
+                    <td th:text="${c.id}"></td>
+                    <td th:text="${c.nomeCliente}"></td>
+                    <td>
+                        <a th:href="@{/carrinhos/editar/{id}(id=${c.id})}" class="btn btn-warning btn-sm">Editar</a>
+                        <a th:href="@{/carrinhos/deletar/{id}(id=${c.id})}" class="btn btn-danger btn-sm">Deletar</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <a th:href="@{/}" class="btn btn-primary mt-3">Voltar ao Menu</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

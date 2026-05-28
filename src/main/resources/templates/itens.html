@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Itens</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="card shadow mb-4">
+        <div class="card-header bg-dark text-white">
+            <h2 class="mb-0" th:text="${itemCarrinho.id != null} ? 'Editar Item' : 'Adicionar Item ao Carrinho'"></h2>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/itens/salvar}" th:object="${itemCarrinho}" method="post" class="row g-3">
+                <input type="hidden" th:field="*{id}">
+                <div class="col-md-4">
+                    <label class="form-label">Quantidade</label>
+                    <input type="number" class="form-control" th:field="*{quantidade}" required>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Produto</label>
+                    <select class="form-select" th:field="*{produto.id}">
+                        <option th:each="p : ${produtos}" th:value="${p.id}" th:text="${p.nome}"></option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Carrinho</label>
+                    <select class="form-select" th:field="*{carrinho.id}">
+                        <option th:each="c : ${carrinhos}" th:value="${c.id}" th:text="${c.nomeCliente}"></option>
+                    </select>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success">Salvar</button>
+                    <a th:href="@{/itens}" class="btn btn-secondary">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Carrinho</th>
+                    <th>Produto</th>
+                    <th>Quantidade</th>
+                    <th>Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="i : ${itens}">
+                    <td th:text="${i.id}"></td>
+                    <td th:text="${i.carrinho.nomeCliente}"></td>
+                    <td th:text="${i.produto.nome}"></td>
+                    <td th:text="${i.quantidade}"></td>
+                    <td>
+                        <a th:href="@{/itens/editar/{id}(id=${i.id})}" class="btn btn-warning btn-sm">Editar</a>
+                        <a th:href="@{/itens/deletar/{id}(id=${i.id})}" class="btn btn-danger btn-sm">Deletar</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <a th:href="@{/}" class="btn btn-primary mt-3">Voltar ao Menu</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

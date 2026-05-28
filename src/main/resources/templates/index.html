@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sistema de Loja</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-header bg-primary text-white text-center">
+            <h1>Menu Principal</h1>
+        </div>
+        <div class="card-body">
+            <div class="d-grid gap-3 col-6 mx-auto">
+                <a th:href="@{/produtos}" class="btn btn-outline-primary btn-lg">Gerenciar Produtos</a>
+                <a th:href="@{/carrinhos}" class="btn btn-outline-primary btn-lg">Gerenciar Carrinhos</a>
+                <a th:href="@{/itens}" class="btn btn-outline-primary btn-lg">Gerenciar Itens no Carrinho</a>
+                <a th:href="@{/relatorio}" class="btn btn-outline-success btn-lg">Relatório de Vendas</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
